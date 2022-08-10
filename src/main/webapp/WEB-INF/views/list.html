@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        th,td{
+            border: solid 1px;
+        }
+    </style>
+</head>
+<body>
+<h3>Student List</h3>
+<p th:text="${message}" style="color: blue"></p>
+<p><a href="/create">Add new student</a></p>
+
+<form action="/search" method="post">
+    <input name="search" placeholder="Enter name">
+    <input value="Search" type="submit">
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name:</th>
+        <th>Date Of Birth:</th>
+        <th>Address:</th>
+        <th>Phone number: </th>
+        <th>Email:</th>
+        <th>Classroom: </th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="s, loop : ${students}">
+        <td th:text="${loop.count}"></td>
+        <td th:text="${s.name}"></td>
+        <td th:text="${s.dateOfBirth}"></td>
+        <td th:text="${s.address}"></td>
+        <td th:text="${s.phoneNumber}"></td>
+        <td th:text="${s.email}"></td>
+        <td th:text="${s.classroom.nameC}"></td>
+        <td><a th:href="@{/edit/{id}(id = ${s.id})}">Edit</a></td>
+        <td><a th:href="@{/delete/{id}(id = ${s.id})}">Delete</a></td>
+        <td><a th:href="@{/view/{id}(id = ${s.id})}">View</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
